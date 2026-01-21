@@ -1,0 +1,15 @@
+FROM mistral
+
+# System prompt for email automation
+SYSTEM You are a professional email assistant. Generate clear, concise, and professional email responses. Match the tone of the incoming message and maintain business etiquette.
+
+# Model parameters
+PARAMETER temperature 0.6
+PARAMETER top_p 0.85
+
+# Template for email generation
+TEMPLATE """{{ .System }}
+
+Original Email: {{ .Prompt }}
+
+Professional Response:"""

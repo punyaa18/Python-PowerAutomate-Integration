@@ -1,58 +1,211 @@
-# Python Meets Power Automate: Trigger via URL
+# Ollama Integration: Power Automate + VS Code
 
-A compact, developer-friendly reference and working Python client for triggering Microsoft Power Automate flows via HTTP. It includes:
+> **Run local AI models seamlessly with Power Automate workflows and VS Code development**
 
-- Step-by-step setup for an HTTP-triggered flow
-- A reusable Python script to POST/GET to your flow
-- Sample payloads, environment config, and quick usage
-- Security tips and common use cases
+[![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)](https://www.python.org/downloads/)
+[![Ollama](https://img.shields.io/badge/Ollama-Local%20LLM-green.svg)](https://ollama.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-## Prerequisites
-- A Power Automate environment and access to create flows
-- A generated HTTP trigger URL (POST is typical)
-- Python 3.9+ on your machine
-This is what your flow would look like
-<img width="750" height="379" alt="image" src="https://github.com/user-attachments/assets/b7d0acec-ae21-4724-87ce-9bad618c6061" />
+## Overview
 
-## Setup: Power Automate HTTP Trigger
-1. Open Power Automate (https://make.powerautomate.com).
-2. Create an Instant cloud flow and choose "When an HTTP request is received".
-3. Define the JSON schema for the request body if you plan to pass data (example in `examples/payload.json`).
-4. Add one or more actions (e.g., send an email, update a SharePoint list).
-5. Save the flow and copy the generated HTTP URL from the trigger card.
-<img width="750" height="377" alt="image" src="https://github.com/user-attachments/assets/dfded0b4-6e01-44de-b70f-625097e8ed0c" />  
-<img width="750" height="328" alt="image" src="https://github.com/user-attachments/assets/6c4eb3f3-652f-4dbd-addc-80c252578726" />  
-<img width="750" height="378" alt="image" src="https://github.com/user-attachments/assets/92278dc4-484b-4e66-ac8f-d0c5b73a5380" />  
-<img width="750" height="361" alt="image" src="https://github.com/user-attachments/assets/45284ca3-003b-4d48-ab39-a619b8268820" />   
+This repository demonstrates how to integrate **Ollama** — a local Large Language Model (LLM) runtime — with **Power Automate** and **VS Code** to create powerful, privacy-focused AI workflows. Run models like LLaMA2, Mistral, or Gemma entirely on your machine without cloud dependencies.
+
+### Why This Matters
+
+- **🔒 Privacy-First**: Keep sensitive data local — no cloud APIs required
+- **⚡ Real-Time Automation**: Trigger AI-powered workflows with Power Automate
+- **🛠️ Developer-Friendly**: Full VS Code integration with Python
+- **🌐 Offline Capable**: Works without internet connectivity
+- **🎯 Custom Models**: Build and deploy your own models using Modelfiles
+
+## Features
+
+- ✅ Complete Ollama installation and setup guide
+- ✅ Terminal command reference for model management
+- ✅ VS Code Python integration examples
+- ✅ Power Automate workflow templates
+- ✅ Model interaction best practices
+- ✅ Local API server configuration
+
+## Quick Start
+
+### Prerequisites
+
+- Windows, macOS, or Linux
+- Python 3.7 or higher
+- VS Code (recommended)
+- 8GB+ RAM (16GB recommended for larger models)
+
+### Installation
+
+1. **Install Ollama**
+   ```bash
+   # Visit https://ollama.com/download
+   # Run the installer for your OS
    
-## Python Client
-This repo provides `src/trigger_flow.py` to send HTTP requests to your flow with:
-- JSON payload from file or inline
-- Optional headers (Authorization Bearer, shared secret)
-- `--dry-run` mode to preview without sending
+   # Verify installation
+   ollama --version
+   ```
 
-### Install dependencies
+2. **Download a Model**
+   ```bash
+   # Pull a model (e.g., Mistral)
+   ollama pull mistral
+   
+   # Verify download
+   ollama list
+   ```
+
+3. **Install Python Package**
+   ```bash
+   pip install ollama
+   ```
+
+4. **Run Your First Query**
+   ```bash
+   ollama run mistral
+   ```
+
+## Usage Examples
+
+### Python Integration (VS Code)
+
+```python
+import ollama
+
+response = ollama.chat(
+    model='mistral',
+    messages=[{
+        'role': 'user',
+        'content': 'Explain quantum computing in simple terms'
+    }],
+    options={
+        'temperature': 0.8  # More creative responses
+    }
+)
+
+print(response['message']['content'])
 ```
-python -m pip install -r requirements.txt
+
+### Terminal Commands
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `ollama run <model>` | Start interactive chat | `ollama run mistral` |
+| `ollama pull <model>` | Download a model | `ollama pull llama2` |
+| `ollama list` | List installed models | `ollama list` |
+| `ollama serve` | Start API server | `ollama serve` |
+
+### In-Chat Commands
+
+While interacting with a model:
+
+- `/?` or `/help` - Show available commands
+- `/bye` - Exit chat session
+- `/system` - Set system prompt
+- `/reset` - Clear conversation history
+
+## Repository Structure
+
+```
+PA+VScode/
+├── README.md                      # This file
+├── blog.md                        # Complete tutorial blog post
+├── POWER_AUTOMATE_SETUP.md        # Power Automate integration guide
+├── GITHUB_SETUP.md                # GitHub setup instructions
+├── CONTRIBUTING.md                # Contribution guidelines
+├── LICENSE                        # MIT License
+├── requirements.txt               # Python dependencies
+├── .gitignore                     # Git ignore rules
+├── examples/
+│   ├── basic_chat.py             # Simple chat example
+│   ├── multi_turn_chat.py        # Conversation with context
+│   ├── power_automate.py         # Flask API server
+│   ├── flow_trigger_complete.py  # Complete flow trigger example
+│   └── custom_model.py           # Custom model creation
+└── modelfiles/
+    ├── python_assistant.modelfile # Python coding assistant
+    └── email_assistant.modelfile  # Email response assistant
 ```
 
+## Documentation
 
-### Send to your flow (POST)
-```
-python src/trigger_flow.py --url "<your-flow-url>" --payload examples/payload.json
-```
-<img width="742" height="550" alt="image" src="https://github.com/user-attachments/assets/d700258a-dc36-4bd1-a592-b5ae00998aec" />
+**📘 Main Guides:**
+- **[blog.md](blog.md)** - Complete tutorial and walkthrough
+- **[POWER_AUTOMATE_SETUP.md](POWER_AUTOMATE_SETUP.md)** - Detailed Power Automate integration guide
+- **[GITHUB_SETUP.md](GITHUB_SETUP.md)** - Instructions for pushing to GitHub
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Contribution guidelines
 
-## Use Cases
-- Triggering workflows from external apps or scripts
-- Webhooks and third-party integrations
-- IoT devices sending events to Power Platform
-- Custom buttons on internal web pages
+**What you'll learn:**
+- What Ollama is and why you need it
+- Complete installation walkthrough
+- Model selection and management
+- VS Code Python integration
+- Power Automate workflow creation
+- Advanced customization options
 
-## Security Tips
-- Treat the flow URL as a secret; avoid public exposure.
-- Use Azure API Management or Custom Connectors for governance.
-- Validate a shared secret or token in your flow logic.
-- Log and monitor flow invocations and failures.
+## Available Models
 
+Explore models at [ollama.com/library](https://ollama.com/library):
 
+- **llama2** - Meta's powerful open-source model
+- **mistral** - Fast and efficient 7B parameter model
+- **gemma** - Google's lightweight AI model
+- **codellama** - Specialized for code generation
+- **phi** - Microsoft's small but capable model
+
+## Power Automate Integration
+
+This project enables you to:
+
+1. Trigger AI responses from Power Automate flows
+2. Generate automated email replies
+3. Summarize content for SharePoint
+4. Log AI interactions to Teams
+5. Create custom approval workflows
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, open an issue first to discuss proposed changes.
+
+## Troubleshooting
+
+**Model not responding?**
+- Ensure Ollama is running: `ollama serve`
+- Check if model is downloaded: `ollama list`
+
+**Connection issues?**
+- Verify Ollama is running on port 11434 (default)
+- Check firewall settings for localhost connections
+
+**Performance issues?**
+- Close unnecessary applications
+- Use smaller models (e.g., phi instead of llama2)
+- Adjust temperature settings for faster responses
+
+## Resources
+
+- [Ollama Official Documentation](https://ollama.com/)
+- [Ollama GitHub Repository](https://github.com/ollama/ollama)
+- [Model Library](https://ollama.com/library)
+- [Python Package Documentation](https://github.com/ollama/ollama-python)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Author
+
+**Punyaa Dixit**
+
+## Acknowledgments
+
+- Ollama team for creating an excellent local LLM runtime
+- The open-source AI community
+- Contributors to this repository
+
+---
+
+⭐ **Star this repository** if you find it helpful!
+
+🔗 **Share** with others building AI-powered automation workflows
