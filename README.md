@@ -11,6 +11,8 @@ A compact, developer-friendly reference and working Python client for triggering
 - A Power Automate environment and access to create flows
 - A generated HTTP trigger URL (POST is typical)
 - Python 3.9+ on your machine
+This is what your flow would look like
+<img width="750" height="379" alt="image" src="https://github.com/user-attachments/assets/b7d0acec-ae21-4724-87ce-9bad618c6061" />
 
 ## Setup: Power Automate HTTP Trigger
 1. Open Power Automate (https://make.powerautomate.com).
@@ -18,7 +20,11 @@ A compact, developer-friendly reference and working Python client for triggering
 3. Define the JSON schema for the request body if you plan to pass data (example in `examples/payload.json`).
 4. Add one or more actions (e.g., send an email, update a SharePoint list).
 5. Save the flow and copy the generated HTTP URL from the trigger card.
-
+<img width="750" height="377" alt="image" src="https://github.com/user-attachments/assets/dfded0b4-6e01-44de-b70f-625097e8ed0c" />  
+<img width="750" height="328" alt="image" src="https://github.com/user-attachments/assets/6c4eb3f3-652f-4dbd-addc-80c252578726" />  
+<img width="750" height="378" alt="image" src="https://github.com/user-attachments/assets/92278dc4-484b-4e66-ac8f-d0c5b73a5380" />  
+<img width="750" height="361" alt="image" src="https://github.com/user-attachments/assets/45284ca3-003b-4d48-ab39-a619b8268820" />   
+   
 ## Python Client
 This repo provides `src/trigger_flow.py` to send HTTP requests to your flow with:
 - JSON payload from file or inline
@@ -30,35 +36,12 @@ This repo provides `src/trigger_flow.py` to send HTTP requests to your flow with
 python -m pip install -r requirements.txt
 ```
 
-### Configure environment (optional but recommended)
-Copy `.env.example` to `.env` and fill in values:
-```
-FLOW_URL=https://prod-00.westus.logic.azure.com/... (your flow URL)
-FLOW_SECRET=your-shared-secret-if-used
-FLOW_BEARER=your-bearer-token-if-used
-```
-
-### Try it (dry-run)
-```
-python src/trigger_flow.py --url "https://httpbin.org/post" --payload examples/payload.json --dry-run
-```
 
 ### Send to your flow (POST)
 ```
 python src/trigger_flow.py --url "<your-flow-url>" --payload examples/payload.json
 ```
-
-### Inline data
-```
-python src/trigger_flow.py --url "<your-flow-url>" --data '{"username":"Mark.Holland","action":"start"}'
-```
-
-### Add headers
-```
-python src/trigger_flow.py --url "<your-flow-url>" --payload examples/payload.json --secret "my-shared-secret"
-python src/trigger_flow.py --url "<your-flow-url>" --payload examples/payload.json --bearer "<token>"
-python src/trigger_flow.py --url "<your-flow-url>" --payload examples/payload.json --header "X-Custom:Value" --header "Another:123"
-```
+<img width="742" height="550" alt="image" src="https://github.com/user-attachments/assets/d700258a-dc36-4bd1-a592-b5ae00998aec" />
 
 ## Use Cases
 - Triggering workflows from external apps or scripts
@@ -72,31 +55,4 @@ python src/trigger_flow.py --url "<your-flow-url>" --payload examples/payload.js
 - Validate a shared secret or token in your flow logic.
 - Log and monitor flow invocations and failures.
 
-## Repository Structure
-```
-.
-├─ src/
-│  └─ trigger_flow.py
-├─ examples/
-│  └─ payload.json
-├─ .env.example
-├─ requirements.txt
-├─ .gitignore
-└─ README.md
-```
 
-## Publish to GitHub (optional)
-1. Create a new empty repo on GitHub.
-2. Run:
-```
-git init
-git add .
-git commit -m "Initial commit: Power Automate HTTP trigger + Python client"
-git branch -M main
-git remote add origin https://github.com/<your-username>/<your-repo>.git
-git push -u origin main
-```
-
-## Notes
-- HTTP methods: GET (read), POST (create/trigger), PUT (update), DELETE (remove).
-- Most flows will be POST; consider adopting a schema for structured data.
