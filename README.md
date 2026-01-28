@@ -1,5 +1,5 @@
 # Python Meets Power Automate: Trigger via URL
-
+(or read directly on - https://blogs.perficient.com/2025/07/16/python-meets-power-automate-trigger-via-url/ )
 A compact, developer-friendly reference and working Python client for triggering Microsoft Power Automate flows via HTTP. It includes:
 
 - Step-by-step setup for an HTTP-triggered flow
@@ -73,5 +73,6 @@ python src/trigger_flow.py --url "<your-flow-url>" --payload examples/payload.js
 - Use Azure API Management or Custom Connectors for governance.
 - Validate a shared secret or token in your flow logic.
 - Log and monitor flow invocations and failures.
+
 
 
