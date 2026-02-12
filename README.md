@@ -74,6 +74,10 @@ python src/trigger_flow.py --url "<your-flow-url>" --payload examples/payload.js
 - Validate a shared secret or token in your flow logic.
 - Log and monitor flow invocations and failures.
 
+# Flowchart Visuals 
+- to simplify and add an visual
+  <img width="1536" height="550" alt="ChatGPT Image Feb 12, 2026, 01_03_16 PM" src="https://github.com/user-attachments/assets/f1c524af-6b65-4172-82b9-22a86ae854f2" />
+
 
 
 
